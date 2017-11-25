@@ -1,0 +1,8 @@
+# A single VM instance
+[vm001]
+192.168.101.107
+
+
+# VM instance Group 
+[vm]
+192.168.101.107
