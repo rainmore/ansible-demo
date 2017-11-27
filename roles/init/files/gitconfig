@@ -1,0 +1,40 @@
+[user]
+    name = WYTN Delopyment
+    email = info@wytn.com.au
+[alias]
+    st = status
+    pr = pull --rebase
+    unadd = reset HEAD --
+    st = status -sb
+    ci = commit
+    co = checkout
+    br = branch
+    cp = cherry-pick -x
+    mt = mergetool
+    dt = difftool
+    la = log --graph --decorate --oneline
+    li = log --graph --decorate --oneline --no-merges -10
+    rv = log -p -w --no-merges -5
+[log]
+    date = local
+    abbrevCommit = true
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+	ui = true
+[difftool]
+    prompt = false
+[diff]
+    tool = vimdiff
+[mergetool]
+    keepBackup = false
+[merge]
+    tool = kdiff3
+[push]
+    default = upstream
+[core]
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX

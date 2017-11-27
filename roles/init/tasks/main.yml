@@ -1,0 +1,49 @@
+- name: "Install Additional Software"
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - git
+    - vim
+    - htop
+    - ntp
+    - at
+    - mc
+    - zip 
+    - unzip 
+    - wget
+    - rsyslog
+    - zsh
+
+- name: "Adding Git Configuration"
+  copy: 
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    owner: root 
+    group: root 
+    mode: 0644
+  with_items: 
+    - {src: '../files/gitignore_global', dest: '/root/.gitignore_global'}
+    - {src: '../files/gitconfig', dest: '/root/.gitconfig'}
+
+- name: "Check oh-my-zsh installation"
+  stat: 
+    path: /root/.oh-my-zsh
+  register: ohMyZshFolder
+
+- name: "Install Oh-my-zsh"
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  when: ohMyZshFolder.stat.isdir is not defined or ohMyZshFolder.stat.isdir == False
+  
+- name: "Change Oh-my-zsh to 'philips'"
+  replace:
+    path: /root/.zshrc
+    regexp: '^ZSH_THEME="robbyrussell"$'
+    replace: 'ZSH_THEME="philips"'
+  when: ohMyZshFolder.stat.isdir is not defined or ohMyZshFolder.stat.isdir == False
+  
+- name: "Update Oh-my-zsh"
+  shell: git pull --rebase --stat origin master
+  args:
+    chdir: /root/.oh-my-zsh
+  when: ohMyZshFolder.stat.isdir is defined and ohMyZshFolder.stat.isdir
+
+

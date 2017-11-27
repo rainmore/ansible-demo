@@ -1,0 +1,5 @@
+overwrite_global_mycnf: no
+mysql_root_password: 'ASuperComplicatedPasswordContains123456789'
+mysql_user_password: 'ASuperComplicatedPasswordContains123456789'
+mysql_config_file: /etc/mysql/mariadb.cnf
+mysql_root_password_update: yes
