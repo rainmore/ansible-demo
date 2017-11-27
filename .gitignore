@@ -40,5 +40,4 @@ Thumbs.db
 src/test/resources/application*.properties
 
 # ansible
-playbook.*
-
+playbook.retry
