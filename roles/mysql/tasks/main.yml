@@ -1,34 +1,23 @@
 - name: Include default variables.
   include_vars:
     file: default.yml
-    # name: default
+
+- name: Specify MySQL root password before installing
+  debconf: name='mysql-server' question='mysql-server/root_password' value='{{ mysql_root_password | quote }}' vtype='password'
+  
+- name: Confirm MySQL root password before installing
+  debconf: name='mysql-server' question='mysql-server/root_password_again' value='{{ mysql_root_password | quote }}' vtype='password'
+  become: true
 
 - name: Install MySQL
-  apt: pkg={{item}} state=installed
+  apt: pkg={{ item }} state=installed
   with_items:
     - mysql-server-5.7
-    - python-mysqldb
-
+    - python3-mysqldb
+  update_cache: true
+  
 - name: Start the MySQL service
   action: service name=mysql state=started
 
-- name: Update mysql root password for all root accounts "{{ mysql_root_password }}"
-  mysql_user: name=root password="{{ mysql_root_password }}" priv="*.*:ALL,GRANT"
-
-
-# - name: root password is present
-#   mysql_user: name=root host={{item}} password={{ mysql_root_password }} state=present
-#   with_items:
-#     - '::1'
-#     - '127.0.0.1'
-#     - 'localhost'
-# 
-# - name: install .my.cnf with credentials
-#   template: src=my.cnf.j2 dest=/root/.my.cnf
-#             mode=0400
-#   tags: my_cnf
-# 
-# - name: Remove the test database
-#   mysql_db: name=test state=absent
-#   when: mysql_remove_test_database
-# 
+- name: Create Mysql configuration file
+  template: src=my.cnf.j2 dest=/etc/my.cnf

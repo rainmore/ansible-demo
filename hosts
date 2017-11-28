@@ -1,8 +1,8 @@
-# A single VM instance
-[vm001]
+[servers]
 192.168.101.107
 
+[dbservers]
+192.168.101.107
 
-# VM instance Group 
-[vm]
+[dockerserver]
 192.168.101.107

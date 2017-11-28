@@ -1,6 +1,6 @@
 [user]
-    name = WYTN Delopyment
-    email = info@wytn.com.au
+    name = WYTN Deployment
+    email = deployment@wytn.com.au
 [alias]
     st = status
     pr = pull --rebase

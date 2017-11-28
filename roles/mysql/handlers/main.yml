@@ -1,0 +1,9 @@
+---
+# Handler to handle DB tier notifications
+
+- name: restart mysql
+  service: name=mysql state=restarted
+  listen: "restart web services"
+
+- name: stop mysql
+  service: name=mysql state=stopped

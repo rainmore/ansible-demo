@@ -1,6 +1,9 @@
 Ansible 
 =======
 
+python2 and ssh are required on remote
+
+ssh-copy-id -i is required on local
 
 
 # WorkStation Setup
@@ -32,3 +35,14 @@ Run a script to a single server with specified the `hosts` file
 ansible vm001 -i hosts -m script -a "vm001.sh"
 ```
 
+# Playbook
+
+Prompt
+```
+ansible-playbook -K playbook.yml
+```
+
+Check syntax
+```
+ansible-playbook --syntax-check playbook.yml
+```

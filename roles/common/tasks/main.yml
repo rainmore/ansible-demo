@@ -1,3 +1,7 @@
+- name: Updated APT
+  apt:
+   update_cache: yes
+
 - name: "Install Additional Software"
   apt: pkg={{ item }} state=installed
   with_items:
@@ -45,5 +49,3 @@
   args:
     chdir: /root/.oh-my-zsh
   when: ohMyZshFolder.stat.isdir is defined and ohMyZshFolder.stat.isdir
-
-
